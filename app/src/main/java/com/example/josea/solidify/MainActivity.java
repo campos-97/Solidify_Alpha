@@ -25,42 +25,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        glSurfaceView = new GLSurfaceView(this);
-
-        setContentView(glSurfaceView);
-
-        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
-        final boolean supportEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
-
-        if (supportEs2){
-            glSurfaceView.setEGLContextClientVersion(2);
-
-            final DisplayMetrics  displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-
-        } else {
-            return;
-        }
 
 
         // Example of a call to a native method
-        //TextView tv = (TextView) findViewById(R.id.sample_text);
-        //tv.setText(Integer.toString(getInt()));
+        TextView tv = (TextView) findViewById(R.id.sample_text);
+        tv.setText(Integer.toString(getInt(4,5)));
 
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        glSurfaceView.onResume();
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        glSurfaceView.onPause();
     }
 
     /**
@@ -68,6 +48,6 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
-    public native int getInt();
+    public native int getInt(int a, int b);
     public native int crap();
 }
