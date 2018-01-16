@@ -25,5 +25,5 @@ JNIEXPORT jint
 
 JNICALL
 Java_com_example_josea_solidify_MainActivity_crap(JNIEnv *env, jobject /* this*/){
-    return 666;
+    return 777;
 }
