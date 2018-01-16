@@ -19,3 +19,11 @@ JNICALL
 Java_com_example_josea_solidify_MainActivity_getInt(JNIEnv *env, jobject /* this*/){
     return 555;
 }
+
+extern "C"
+JNIEXPORT jint
+
+JNICALL
+Java_com_example_josea_solidify_MainActivity_crap(JNIEnv *env, jobject /* this*/){
+    return 666;
+}
