@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(Integer.toString(getInt(4,5)));
+        tv.setText(Double.toString(derivative(3)));
 
     }
 
@@ -49,5 +49,5 @@ public class MainActivity extends AppCompatActivity {
      */
     public native String stringFromJNI();
     public native int getInt(int a, int b);
-    public native int crap();
+    public native double derivative(double x);
 }

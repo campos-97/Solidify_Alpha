@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <string>
+#include "pruebita.h"
 
 extern "C"
 JNIEXPORT jstring
@@ -21,9 +22,9 @@ Java_com_example_josea_solidify_MainActivity_getInt(JNIEnv *env, jobject /* this
 }
 
 extern "C"
-JNIEXPORT jint
+JNIEXPORT jdouble
 
 JNICALL
-Java_com_example_josea_solidify_MainActivity_crap(JNIEnv *env, jobject /* this*/){
-    return 777;
+Java_com_example_josea_solidify_MainActivity_derivative(JNIEnv *env, jobject /* this*/, double x){
+    return pruebita::numericalDerivative(x);
 }
