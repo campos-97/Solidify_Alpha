@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # Gradle automatically packages shared libraries with your APK.
 
 add_library(pruebita SHARED src/main/cpp/pruebita.cpp )
-
+add_library(MathParser SHARED src/main/cpp/exprtk.cpp )
 add_library( # Sets the name of the library.
              native-lib
 
