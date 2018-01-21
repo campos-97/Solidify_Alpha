@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.josea.solidify.OpenGL.Renderers.VBO_Renderer;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(Double.toString(derivative(3)));
-
+        Toast.makeText(this, Double.toString(derivative(3)), Toast.LENGTH_SHORT).show();
     }
 
     @Override

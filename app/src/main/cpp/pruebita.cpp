@@ -6,18 +6,17 @@
 #include "exprtk.cpp"
 
 template <typename T>
-void pruebita::mierda()
+double pruebita::equationEval(std::string expression_string, std::string variable, double varValue) //Array of variables could be implemented
 {
     typedef exprtk::symbol_table<T> symbol_table_t;
     typedef exprtk::expression<T>     expression_t;
     typedef exprtk::parser<T>             parser_t;
 
-    std::string expression_string = "clamp(-1.0,sin(2 * pi * x) + cos(x / 2 * pi),+1.0)";
 
     T x;
 
     symbol_table_t symbol_table;
-    symbol_table.add_variable("x",x);
+    symbol_table.add_variable(variable,x);
     symbol_table.add_constants();
 
     expression_t expression;
@@ -26,20 +25,16 @@ void pruebita::mierda()
     parser_t parser;
     parser.compile(expression_string,expression);
 
-    for (x = T(-5); x <= T(+5); x += T(0.001))
-    {
-        T y = expression.value();
-        printf("%19.15f\t%19.15f\n",x,y);
+    x = T(varValue);
 
-    }
+    return expression.value();
 
 }
-double pruebita::function(double x) {
-    return x*x;
-}
+
 double pruebita::numericalDerivative(double x){
     double epsilon = 10e-7;
-    double result = (function(x+epsilon) - function(x))/epsilon;
-    mierda<double>();
+    std::string function = "x*x";
+    std::string var = "x";
+    double result = (equationEval<double>(function, var, x+epsilon) - equationEval<double>(function, var, x))/epsilon;
     return result;
 }
