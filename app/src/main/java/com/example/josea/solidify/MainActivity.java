@@ -3,11 +3,16 @@ package com.example.josea.solidify;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
-import android.opengl.GLSurfaceView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.TextView;
+
+
+import com.example.josea.solidify.OpenGL.Renderers.VBO_Renderer;
+import com.example.josea.solidify.OpenGL.View.SurfaceView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // OpenGL instances.
-    private GLSurfaceView glSurfaceView;
+    private SurfaceView glSurfaceView;
+    private VBO_Renderer vbo_renderer;
 
 
     @Override
@@ -25,6 +31,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        glSurfaceView = new SurfaceView(this);
+
+        setContentView(glSurfaceView);
+
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
+        final boolean supportEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
+
+        if (supportEs2){
+            glSurfaceView.setEGLContextClientVersion(2);
+
+            final DisplayMetrics  displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+            vbo_renderer = new VBO_Renderer(this, glSurfaceView);
+            glSurfaceView.setRenderer(vbo_renderer, displayMetrics.density);
+
+        } else {
+            return;
+        }
 
 
         // Example of a call to a native method
@@ -42,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause(){
         super.onPause();
     }
+
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
